@@ -1,4 +1,5 @@
 
+# Uppgift 1
 # Iterator-funktion som anropar givet block n gånger. 
 def n_times(n, &block)
     for _ in 1..n 
@@ -25,3 +26,5 @@ do_three = Repeat.new(3)
 # Skriver ut instansen av Repeat med @n=3
 p do_three
 do_three.each { puts "Horray!" }
+
+# Uppgift 2
