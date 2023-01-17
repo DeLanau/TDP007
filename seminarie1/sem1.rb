@@ -1,11 +1,11 @@
 require 'date'
 
 '''Uppgift 1'''
-
+# Denna uppgift testas inte eftersom den gjordes extra utöver det obligatoriska antalet uppgifter som krävdes.
 # Iterator-funktion som anropar givet block n gånger. 
-def n_times(n, &block)
-    n.times do
-        block.call()
+def n_times(n)
+    n.times do 
+        yield
     end
 end
 
@@ -22,11 +22,6 @@ class Repeat
     end
 end
 
-
-n_times(3) { puts "Hello!" }
-do_three = Repeat.new(3)
-do_three.each { puts "Horray!" }
-
 ''' Uppgift 2 '''
 
 # Factorial är en funktion som beräknar fakutleten av ett positivt tal.
@@ -34,17 +29,12 @@ def factorial(n)
     (1..n).inject(:*)
 end
 
-p factorial(0)
-
 ''' Uppgift 3 '''
 
 # Max_by returnerar objektet med maximal värde från angiven block.
 def longest_string(ar)
     p ar.max_by{|obj|obj.length} 
 end
-
-longest_string ["apelsin", "banan", "citron"]
-
 
 ''' Uppgift 5 '''
 
@@ -62,35 +52,33 @@ class PersonName
     end
 end
 
-person = PersonName.new("Lasse", "Maja")
-p person.get_fullname()
-person.set_fullname("Claes Ohlson")
-p person.get_fullname()
-
 ''' Uppgift 6 '''
 
 class Person < PersonName
     def initialize(name, surname, age)
         @age = age 
-        @birthyear = DateTime.now - @age * 365
+        @birthyear = DateTime.now.year - @age
         super(name, surname)
     end
+
+    def get_age()
+        return @age
+    end
+
+    def get_birthyear()
+        return @birthyear
+    end
+    
     def set_age(new_age)
         @age = new_age
         @birthyear = DateTime.now.year - @age
     end
+
     def set_birthyear(new_by)
         @birthyear = new_by
         @age = DateTime.now.year - @birthyear
     end
 end
-
-new_person = Person.new("Hej", "svej", 20)
-new_person.set_age(25)
-p new_person
-new_person.set_birthyear(2000)
-p new_person
-
 
 ''' Uppgift 7 '''
 
@@ -100,8 +88,6 @@ class Integer
         fib(n - 1) + fib(n - 2)
     end
 end
-
-p Integer.fib(5)
 
 ''' Uppgift 8 '''
 
@@ -116,8 +102,6 @@ class String
     end
 end
 
-"Laugh out loud".acronym
-
 ''' Uppgift 10 '''
 
 def find_username(str)
@@ -128,8 +112,6 @@ def find_username(str)
     end
 end
 
-p find_username("USERNAME: Brian")
-
 ''' Uppgift 12 '''
 
 def regnr(str)
@@ -139,6 +121,3 @@ def regnr(str)
         return false
     end
 end
-
-regnr("Min bil heter FMA297.")
-regnr("XQT784")
