@@ -1,5 +1,4 @@
 require 'date'
-require 're'
 
 '''Uppgift 1'''
 
@@ -81,13 +80,12 @@ class Person < PersonName
         @birthyear = DateTime.now.year - @age
     end
     def set_birthyear(new_by)
-        p new_by
         @birthyear = new_by
         @age = DateTime.now.year - @birthyear
     end
 end
 
-new_person = Person.new("He", "svej", 20)
+new_person = Person.new("Hej", "svej", 20)
 new_person.set_age(25)
 p new_person
 new_person.set_birthyear(2000)
@@ -123,5 +121,24 @@ end
 ''' Uppgift 10 '''
 
 def find_username(str)
-
+    if str[/:\s*([a-zA-Z]{1,})/] != nil
+        return str.scan(/:\s*([a-zA-Z]{1,})/).join
+    else
+        return false
+    end
 end
+
+p find_username("USERNAME: Brian")
+
+''' Uppgift 12 '''
+
+def regnr(str)
+    if str[/[A-HJ-PR-UW-Z]{3}[0-9]{3}/] != nil
+        return str[/[A-HJ-PR-UW-Z]{3}[0-9]{3}/]
+    else
+        return false
+    end
+end
+
+regnr("Min bil heter FMA297.")
+regnr("XQT784")
