@@ -1,4 +1,5 @@
 require 'date'
+require 're'
 
 '''Uppgift 1'''
 
@@ -45,13 +46,6 @@ end
 
 longest_string ["apelsin", "banan", "citron"]
 
- ''' Uppgift 4 '''
-
-# def find_it(ar, &block)
-#     p ar.find{block}
-# end
-
-# find_it(["apelsin", "banan", "citron"]) { |a,b| a.length > b.length }
 
 ''' Uppgift 5 '''
 
@@ -76,16 +70,58 @@ p person.get_fullname()
 
 ''' Uppgift 6 '''
 
-# class Person < PersonName
-#     def initialize(name=super(name), surname=super(surname), age)
-#         @age = age 
-#         @birthyear = DateTime.now - @age * 365
-#         super(name, surname)
-#     end
-# end
+class Person < PersonName
+    def initialize(name, surname, age)
+        @age = age 
+        @birthyear = DateTime.now - @age * 365
+        super(name, surname)
+    end
+    def set_age(new_age)
+        @age = new_age
+        @birthyear = DateTime.now.year - @age
+    end
+    def set_birthyear(new_by)
+        p new_by
+        @birthyear = new_by
+        @age = DateTime.now.year - @birthyear
+    end
+end
 
-# personna = Person.new( 20)
-# p personna
+new_person = Person.new("He", "svej", 20)
+new_person.set_age(25)
+p new_person
+new_person.set_birthyear(2000)
+p new_person
+
 
 ''' Uppgift 7 '''
 
+class Integer 
+    def self.fib(n)
+        return n if n <= 1
+        fib(n - 1) + fib(n - 2)
+    end
+end
+
+p Integer.fib(6)
+
+''' Uppgift 8 '''
+
+class String
+    def acronym()
+        res = []
+        ar = self.split(' ')
+        for x in ar
+            res.append(x[0].capitalize)
+        end
+        return res.join
+    end
+end
+
+"Laugh out loud".acronym
+
+''' Uppgift 10 '''
+
+def find_username(str)
+
+end
