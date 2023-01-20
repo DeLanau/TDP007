@@ -1,4 +1,4 @@
-'''Uppgift 1a'''
+'''Uppgift 1'''
 def file_to_list(name, re)
 
     file = File.open(name).readlines().map()
@@ -47,3 +47,13 @@ end
 #^(\s*\d{1,2} || \s*\w{2}\s*)\K (\d{2}\*?\.?\d*\s{2,4}\d{2}\*?\.?\d*)
 #(/\d{2}  -  \d{2}/
 
+''' Uppgift 2 ''' 
+
+=begin 
+
+    .läsa websidan.
+    .skapa händelse - event med data, dagen, månad, beskrivning. 
+    .lägga info till list med alla händelser.
+    .skriva ut. 
+
+=end
