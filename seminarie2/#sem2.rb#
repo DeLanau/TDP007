@@ -1,0 +1,69 @@
+'''Uppgift 1a'''
+def read_file(name)
+
+    file = File.open(name).readlines().map()
+
+    list = []
+
+    for f in file do
+
+        if f =~ /\d{2}  -  \d{2}/ then
+            list.push(f)
+        end
+    end
+
+    return list
+end
+
+def test 
+
+    teams = read_file("football.txt")
+
+    teams.sort_by! do |t|
+
+        t = t.slice(/\d{2}  -  \d{2}/)
+
+        a = t[0..2].to_i
+        b = t[7..9].to_i
+
+        diff = 0
+
+        if a < b then
+            diff = b - a 
+        else
+            diff = a - b 
+        end 
+        
+    end 
+
+    return teams
+end 
+
+smallest_diff_team = test[0]
+sorted_teams = test
+
+
+
+
+# for f in teams do
+        
+#     if f =~ /\d{2}  -  \d{2}/ then
+
+#         f = f.slice(/\d{2}  -  \d{2}/)
+
+#         a = f[0..2].to_i
+#         b = f[7..9].to_i
+
+#         diff = 0
+
+#         if a < b then
+#             diff = b - a 
+#         else
+#             diff = a - b 
+#         end 
+        
+#         differens.push(diff)
+    
+#     end 
+# end
+# return differens.sort[0]
