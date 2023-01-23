@@ -97,21 +97,31 @@ def get_span(list, pos, tag)
 end
 
 list = el_to_list
-puts list[0]
-puts get_span(list, 0, "summary")
+puts list[7]
+
+event_day_list = []
+list.each_index do |index|
+    event_day_list.push(Event_Day.new(
+    get_span(list, index, "summary"), 
+    get_span(list, index, "dtstart"), 
+    get_span(list, index, "locality"), 
+    get_span(list, index, "region")))
+
+end
 
 day = Event_Day.new(
-    get_span(list, 0, "summary"), 
-    get_span(list, 0, "dtstart"), 
-    get_span(list, 0, "locality"), 
-    get_span(list, 0, "region"))
+    get_span(list, 7, "summary"), 
+    get_span(list, 7, "dtstart"), 
+    get_span(list, 7, "locality"), 
+    get_span(list, 7, "region"))
 
 puts "Test:"
 
-puts day.summary
-puts day.date
-puts day.location
-puts day.desc
+
+puts event_day_list[0].summary
+puts event_day_list[0].date
+puts event_day_list[0].location
+
 
 #puts list
 
