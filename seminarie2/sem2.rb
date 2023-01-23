@@ -48,6 +48,10 @@ end
 #(/\d{2}  -  \d{2}/
 
 ''' Uppgift 2 ''' 
+require 'rexml/document'
+
+# src = File.new "events.html"
+# doc = REXML::Document.new src
 
 =begin 
 
