@@ -1,16 +1,18 @@
 '''Uppgift 1'''
 def file_to_list(name, re)
 
-    file = File.open(name).readlines().map()
+    file = open(name, "r") #File.open(name).readlines().map()
     re = Regexp.new(re)
     list = []
-
+ 
     for f in file do
 
         if f =~ re then
             list.push(f)
         end
     end
+
+    file.close
 
     return list
 end
@@ -49,9 +51,87 @@ end
 
 ''' Uppgift 2 ''' 
 require 'rexml/document'
+require 'rexml/element'
 
-# src = File.new "events.html"
-# doc = REXML::Document.new src
+require 'open-uri'
+
+class Event_Day
+
+    attr_accessor :summary, :date, :location, :desc
+
+    def initialize(summary, date, location, desc)
+        @summary = summary
+        @date = date
+        @location = location
+        @desc = desc
+    end
+
+end
+
+def el_to_list()
+
+    src_html = URI.open('https://www.ida.liu.se/~TDP007/current/material/seminarie2/events.html').read
+    doc2 = REXML::Document.new src_html
+    r = doc2.root
+
+    list = []
+
+    r.elements.each("//div[@class='vevent']") do |n| 
+
+        el = REXML::Element.new n
+    
+        list.push(n)
+    
+    end
+
+    return list
+end 
+
+def get_span(list, pos, tag)
+
+    list[pos].each_element(".//span") {
+    |e| if e.inspect.include? tag
+            return e.text.to_s
+        end
+    }
+end
+
+list = el_to_list
+puts list[0]
+puts get_span(list, 0, "summary")
+
+day = Event_Day.new(
+    get_span(list, 0, "summary"), 
+    get_span(list, 0, "dtstart"), 
+    get_span(list, 0, "locality"), 
+    get_span(list, 0, "region"))
+
+puts "Test:"
+
+puts day.summary
+puts day.date
+puts day.location
+puts day.desc
+
+#puts list
+
+#puts doc.elements[7].methods
+
+#summary+date+location+desc#
+
+=begin 
+
+
+   day = Event_Day.new
+
+    if n.inspect.include? "summary" &&  
+        day.summary = n.text
+    else n.inspect.include? "dtstart"
+        day.date = n.text
+    end
+    list.push(day)
+
+=end
 
 =begin 
 

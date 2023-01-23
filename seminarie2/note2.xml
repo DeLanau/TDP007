@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE note>
+<note>
+  <to>Ola</to>
+  <from>Peter</from>
+  <heading>Beer on Friday?</heading>
+  <body>
+    <paragraph>There's a new Dutch place on S:t Larsgatan.
+    I heard they have lots of different Dutch beers. How about
+    a test this Friday night?</paragraph>
+    <paragraph>By the way, it's called De Klomp.</paragraph>
+  </body>
+</note>

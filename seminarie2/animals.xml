@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE key SYSTEM "key.dtd">
+<key header="Animals">
+
+<node id="start" header="Classification of animals">
+<alt dest="bird">Has wings and flies</alt>
+<alt dest="fish">Lives in the water</alt>
+<alt dest="land">Mostly walks on the ground</alt>
+</node>
+
+<node id="bird" header="Birds">
+<alt dest="parus_major">14 cm, with a broad black line (broader in the male) 
+down its otherwise yellow chest. The neck and head are black with white 
+cheeks and ear coverts. Upper parts are olive.</alt>
+<alt dest="cyanistes_caeruleus">The azure blue crown and dark blue line passing 
+through the eye and encircling the white cheeks to the chin gives this bird
+a very distinctive appearance. The forehead and a bar on the wing are 
+white.</alt>
+</node>
+
+<node id="fish" header="Fishes">
+<alt dest="gadus_morhua">It can grow to two metres in length and weigh 
+up to 96 kilos. It can live for 25 years. Colouring is brown to green with 
+spots on the dorsal side, shading to silver ventrally. A lateral line is 
+clearly visible.</alt>
+<alt dest="salmo_salar">
+While they live in freshwater they have blue and red spots. While they 
+mature they take on a silver blue sheen. When they are adults the easiest 
+way of identifying them is by the black spots predominantly above the lateral 
+line, although its caudal fin is usually unspotted.</alt>
+</node>
+
+<node id="land" header="Land living animals">
+<alt dest="twolegs">Two legs</alt>
+<alt dest="fourlegs">Four legs</alt>
+<alt dest="eightlegs">Eight legs</alt>
+</node>
+
+<node id="parus_major" header="Great Tit (Parus major)" ref="http://en.wikipedia.org/wiki/Great_Tit"/> <!-- Talgoxe -->
+
+<node id="cyanistes_caeruleus" header="Blue Tit (Cyanistes caeruleus)" ref="http://en.wikipedia.org/wiki/Blue_Tit"/> <!-- Blåmes -->
+
+<node id="gadus_morhua" header="Atlantic Cod (Gadus morhua)" ref="http://en.wikipedia.org/wiki/Atlantic_cod"/> <!-- Torsk -->
+
+<node id="salmo_salar" header="Atlantic Salmon (Salmo salar)" ref="http://en.wikipedia.org/wiki/Salmo_salar"/> <!-- Lax -->
+
+<node id="twolegs" header="Human (Homo sapiens)"/>
+
+<node id="fourlegs" header="Four-legged animals">
+<alt dest="cat">Has a long tail. Sneaks around catching mice.</alt>
+<alt dest="cow">Stands silently in the field chewing grass and
+contemplating life in general.</alt>
+<alt dest="horse">Hairy neck. Good for riding.</alt>
+</node>
+
+<node id="cat" header="Cat"/>
+
+<node id="cow" header="Cow"/>
+
+<node id="horse" header="Horse"/>
+
+<node id="eightlegs" header="Spider"/>
+
+</key>
