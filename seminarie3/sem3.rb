@@ -18,10 +18,20 @@ class Person
     @points += @posts[@post]
     @points += @experience[@exp]
     @points += @genders[@gender]
-    @years += @years[yo]
+    @points += @years[yo]
+
+    if @gender == "M" && @xp > 3 then
+      @points = @points * 0.9
+    end
+
+    if @car == "Volvo" && @post.match(/^(58)/) then
+      @points = @points * 1.2 
+    end
+
     return @points
   end
+
 end
 
-per = Person.new("Volvo", "58435", 2, "M", 32)
+per = Person.new("Volvo", "58437", 2, "M", 32)
 puts per.evaluate_policy("policy.rb")
