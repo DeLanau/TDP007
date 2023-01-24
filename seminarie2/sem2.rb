@@ -1,7 +1,8 @@
 '''Uppgift 1'''
+#skapa lista från fil som tar namn och regex som inparametrar, returnerar en lista med alla rader från textfilen.
 def file_to_list(name, re)
 
-    file = open(name, "r") #File.open(name).readlines().map()
+    file = open(name, "r") 
     re = Regexp.new(re)
     list = []
  
@@ -17,8 +18,7 @@ def file_to_list(name, re)
     return list
 end
 
-#puts sort_team("football.txt")
-
+#sorterar radernna från listan utifrån regex som fylls i som inparameter tillsammans med listan. Returnerar sorterade raderna. 
 def sort(name, re) 
 
     teams = file_to_list(name, re)
@@ -44,33 +44,29 @@ def sort(name, re)
     return teams
 end 
 
-#^(\s*(\d{1,2} || \w{2})\s*)(\d{2}\*?\.?\d*\s{2,4}\d{2}\*?\.?\d*)
-
-#^(\s*\d{1,2} || \s*\w{2}\s*)\K (\d{2}\*?\.?\d*\s{2,4}\d{2}\*?\.?\d*)
-#(/\d{2}  -  \d{2}/
-
 ''' Uppgift 2 ''' 
 require 'rexml/document'
 require 'rexml/element'
-
 require 'open-uri'
 
+#Eventet blir ett objekt som har viktig information kring eventet. 
 class Event_Day
 
-    attr_accessor :summary, :date, :location, :desc
+    attr_accessor :summary, :date, :location, :region
 
-    def initialize(summary, date, location, desc)
+    def initialize(summary, date, location, region="")
         @summary = summary
         @date = date
         @location = location
-        @desc = desc
+        @region = region
     end
 
 end
 
-def el_to_list()
+#skapa lista med alla element under div med attributen class='vevent'
+def el_to_list(link = "https://www.ida.liu.se/~TDP007/current/material/seminarie2/events.html")
 
-    src_html = URI.open('https://www.ida.liu.se/~TDP007/current/material/seminarie2/events.html').read
+    src_html = URI.open(link).read
     doc2 = REXML::Document.new src_html
     r = doc2.root
 
@@ -87,6 +83,7 @@ def el_to_list()
     return list
 end 
 
+#hämta text från lista av element på position pos, som innehåller tag 
 def get_span(list, pos, tag)
 
     list[pos].each_element(".//span") {
@@ -96,58 +93,37 @@ def get_span(list, pos, tag)
     }
 end
 
-list = el_to_list
-puts list[7]
+#skapa lista av Event_Day
+def create_day_list
 
-event_day_list = []
-list.each_index do |index|
-    event_day_list.push(Event_Day.new(
-    get_span(list, index, "summary"), 
-    get_span(list, index, "dtstart"), 
-    get_span(list, index, "locality"), 
-    get_span(list, index, "region")))
+    list = el_to_list("https://www.ida.liu.se/~TDP007/current/material/seminarie2/events2.html")
 
+    event_day_list = []
+
+    list.each_index do |index|
+        event_day_list.push(Event_Day.new(
+        get_span(list, index, "summary"), 
+        get_span(list, index, "dtstart"), 
+        get_span(list, index, "locality")))
+    end
+    
+    return event_day_list
 end
 
-day = Event_Day.new(
-    get_span(list, 7, "summary"), 
-    get_span(list, 7, "dtstart"), 
-    get_span(list, 7, "locality"), 
-    get_span(list, 7, "region"))
+#vissa en element från lista på position pos 
+def display_element(list, pos)
 
-puts "Test:"
+    puts "Summary: " + list[pos].summary
+    puts "Date: " + list[pos].date
+    puts "Locality: " + list[pos].location
+    puts "-------------------------------------"
 
+end 
 
-puts event_day_list[0].summary
-puts event_day_list[0].date
-puts event_day_list[0].location
+#visa alla element i lista
+def display(list)
 
-
-#puts list
-
-#puts doc.elements[7].methods
-
-#summary+date+location+desc#
-
-=begin 
-
-
-   day = Event_Day.new
-
-    if n.inspect.include? "summary" &&  
-        day.summary = n.text
-    else n.inspect.include? "dtstart"
-        day.date = n.text
-    end
-    list.push(day)
-
-=end
-
-=begin 
-
-    .läsa websidan.
-    .skapa händelse - event med data, dagen, månad, beskrivning. 
-    .lägga info till list med alla händelser.
-    .skriva ut. 
-
-=end
+    list.each_index do |i|
+        display_element(list, i)
+    end 
+end 
