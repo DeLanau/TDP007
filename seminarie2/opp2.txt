@@ -1,0 +1,172 @@
+funktion med 2 parameter, filename och regex, regex overförs som regex och inte som sträng dvs /(regex)/
+
+--------------------------------
+
+def open_file_as_array(fileName, regex)
+  array = file.read.scan(regex) interessant att filen läser och samtidigt scanerar efter angivit regex 
+
+  return array.each{ |item| item.append(item[1].to_i - item[2].to_i) } 
+  
+  en element i array ser ut på följande sätt: 
+  
+  Arsenal
+	79
+	36
+	43
+
+I slutet man går igenom värje element och appendar den med nya värde som är skillnader mellan befintliga värden. 
+  
+end
+
+-------------------------------
+
+def sort_by_difference(arr)
+  return arr.sort_by{ |item| item[3] }.reverse samma sak som senare funktion. 
+end
+
+--------------------------------
+
+def get_object_with_smallest_difference(arr)
+  arr.each{ |item| item[3] = item[3].abs } först de går igenom den tredje element i array för att köra abs som konverterar alla negativa värde till positiva.
+  
+  return arr.sort_by{ |item| item[3] }[0][0] sedan de sorterar array med tredje element och returerar element med den mista värde. 
+end
+
+----------------------------------
+
+##################################Våra: 
+
+Första funktion läser filen och skapar lista med alla rader som matchar regex. 
+
+----------------------------------
+
+def file_to_list(name, re)
+
+    file = open(name, "r") 
+    re = Regexp.new(re)
+    list = []
+ 
+    for f in file do
+
+        if f =~ re then
+            list.push(f)
+        end
+    end
+
+    file.close
+
+    return list
+end
+
+----------------------------------
+
+Sedan andra funktion sorterar filen efter angivit regex. Där vi loopar igenom alla teams och kör sort_by! med uttyrligare matte som raknar
+skillnaden och sorterar. Så att tillslut vi för redan sorterad teams. 
+
+----------------------------------
+
+def sort(name, re) 
+
+    teams = file_to_list(name, re)
+
+    re = Regexp.new(re)
+
+    teams.sort_by! do |t|
+
+        t = t.slice(re) # "12   -   12" "12    12"
+
+        a = t[0..2].to_i
+        b = t[-4..-1].to_i
+        
+        diff = 0
+
+        if a < b then
+            diff = b - a 
+        else
+            diff = a - b 
+        end 
+    end 
+
+    return teams
+end 
+
+----------------------------------
+
+#########################################################################################################
+
+events = []
+
+-->
+
+class Event_Day
+
+    attr_accessor :summary, :date, :location, :region
+
+    def initialize(summary, date, location, region="")
+        @summary = summary
+        @date = date
+        @location = location
+        @region = region
+    end
+
+end
+
+----------------------------------
+
+  if events.size < count+1
+        events.append({}) skapar nya hash 
+      end
+
+ events[count][element.attributes["class"]] = element.text fyller hash med data
+ 
+    path.each_element(".//td[@class='description']/*") { |element| events[count]["description"] = element.text } går till description och lägger den till samma sak med userlink
+    path.each_element(".//a[@class='userLink ']") { |element| events[count]["creator"] = element.text }
+     count += 1 
+ -->
+ 
+ r.elements.each("//div[@class='vevent']") do |n| iterera over alla element med div class vevent 
+
+        el = REXML::Element.new n skapar nya element 
+    
+        list.push(n) pushar element till lista
+    
+    end
+ 
+#hämta text från lista av element på position pos, som innehåller tag 
+def get_span(list, pos, tag)
+
+    list[pos].each_element(".//span") {
+    |e| if e.inspect.include? tag
+            return e.text.to_s
+        end
+    }
+end
+ 
+#skapa lista av Event_Day
+def create_day_list
+
+    list = el_to_list("https://www.ida.liu.se/~TDP007/current/material/seminarie2/events2.html")
+
+    event_day_list = []
+
+    list.each_index do |index|
+        event_day_list.push(Event_Day.new(
+        get_span(list, index, "summary"), 
+        get_span(list, index, "dtstart"), 
+        get_span(list, index, "locality")))
+    end
+    
+    return event_day_list
+end
+ 
+--------------------------------------
+
+#####################################################################################TESTER
+
+tester ser ganska lika. De har två olika klasser för tester av upg1 o 2. wrong_string är nytt för oss men värker vara väldigt användbart.
+assert_nil också nytt men nyttigt. Vi har mest används sig av assert_equal som kanske inte den besta sätt att testa allt men det funkade. tack för idag. 
+
+!!!Ingen test för weather, om de gör det vi skilljer på Gie. 
+ 
+
+
