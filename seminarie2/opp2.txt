@@ -166,7 +166,9 @@ end
 tester ser ganska lika. De har två olika klasser för tester av upg1 o 2. wrong_string är nytt för oss men värker vara väldigt användbart.
 assert_nil också nytt men nyttigt. Vi har mest används sig av assert_equal som kanske inte den besta sätt att testa allt men det funkade. tack för idag. 
 
-!!!Ingen test för weather, om de gör det vi skilljer på Gie. 
+!!!Ingen test för weather, . Nummer av väder istället för skillnaden. Fråga: vad är målet? Vill de visa själva differencen eller början på raden som är aktuell?. 
+ Gruppen testar filhanteringsfunktionen för football filen men inte för weather. Det kan bero på att de nöjer sig med att football textfilen klara testerna som inmatning. Men i och med att datan som är intressant inte är på samma ställe i filerna så kan det vara aktuellt att testa weather ändå. 
+
  
 
 

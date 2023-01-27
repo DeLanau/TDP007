@@ -1,6 +1,5 @@
 # coding: utf-8
 #alla dict med key : value representerar olika tabel. 
-
 @cars = {
 
   "BMW" => 5,
