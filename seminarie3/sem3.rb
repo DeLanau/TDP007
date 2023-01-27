@@ -13,25 +13,28 @@ class Person
 
   def evaluate_policy(filename)
 
+    #läser in filen och kör den som ruby kod. 
     self.instance_eval(File.read(filename))
+
+    #okar points beroende av key : value från tabel
     @points += @cars[@car]
-    @points += @posts[@post]
-    @points += @experience[@exp]
+
+    #check för nil value, om post nummer finns inte med i tabel
+    if @posts[@post] != nil then
+      @points += @posts[@post]
+    end
+    #för att få rätt värde, går igenom select tills exp ligger i rätt interval. sedan för value av den 
+    @points += @experience.select {|e| e === @exp}.values.first
     @points += @genders[@gender]
-    @points += @years[yo]
+    @points += @years.select {|e| e === @yo}.values.first 
 
-    if @gender == "M" && @xp > 3 then
-      @points = @points * 0.9
-    end
-
-    if @car == "Volvo" && @post.match(/^(58)/) then
-      @points = @points * 1.2 
-    end
-
+    #utför rules från policy 
+    rules()
+    
     return @points
   end
 
 end
 
-per = Person.new("Volvo", "58437", 2, "M", 32)
+per = Person.new("Volvo", "58435", 2, "M", 32)
 puts per.evaluate_policy("policy.rb")

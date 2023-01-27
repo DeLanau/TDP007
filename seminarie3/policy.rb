@@ -1,3 +1,6 @@
+# coding: utf-8
+#alla dict med key : value representerar olika tabel. 
+
 @cars = {
 
   "BMW" => 5,
@@ -16,7 +19,6 @@
   "58937" => 9,
   "58726" => 5,
   "58647" => 3
-  
 }
 
 @experience = {
@@ -47,3 +49,19 @@
   71..99 => 3
   
 }
+
+#rules som kan utåkas eller ändras beroende på olika policy. 
+
+def rules()
+
+  if @gender == "M" and @exp < 3 then
+    @points *= 0.9
+    puts 1 
+  end
+
+  if @car == "Volvo" and @post.match(/^(58)/) then
+    @points *= 1.2
+    puts 2
+  end
+  
+end 
