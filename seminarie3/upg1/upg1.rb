@@ -31,10 +31,10 @@ class Person
     #utför rules från policy 
     rules()
     
-    return @points
+    return @points.round(2)
   end
 
 end
 
-per = Person.new("Volvo", "58435", 2, "M", 32)
-puts per.evaluate_policy("policy.rb")
+#per = Person.new("Volvo", "58435", 2, "M", 32)
+#puts per.evaluate_policy("policy.rb").class
