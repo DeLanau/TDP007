@@ -238,9 +238,12 @@ end
 
 class Statement
     def initialize
-        @stateparser = Parser.new("state maker") do 
-            token(/\s+/)
-            token(/\w+/) { |m| m }
+        @stateparser = Parser.new("state maker") do
+            token(/\(/) {|m| m}
+            token(/\)/) {|m| m}
+            token(/\d+/) { |m| m.to_i }
+            token(/\w+/) {|m| m}
+            token(/\s/)
 
             @var = {}
 
@@ -252,18 +255,18 @@ class Statement
             rule :assign do
                 match('(','set', :var, :expr, ')') {|_, _, a, b, _| var{a => b} }
             end
-            # =begin
-            # rule :expr do
-            #     match('(','or', :expr, :expr, ')') {|_, _, a, b, _| a or b}
-            #     match('(','and', :expr, :expr, ')') {|_, _, a, b, _| a and b}
-            #     match('(','not', :expr, :expr, ')') {|_, _, a, b, _| a not b}
-                                
-            # end
-            # =end    
+             #=begin
+            rule :expr do
+              match('(','or', :expr, :expr, ')') {|_, _, a, b, _| a or b}
+              match('(','and', :expr, :expr, ')') {|_, _, a, b, _| a and b}
+              match('(','not', :expr, ')') {|_, _, a, _| not a}
+              match(:term)
+            end
+             #=end    
             rule :term do
-                match(:var)
-                match('true')
-                match('false')
+                match(:var) {|m| m.to_i} 
+                match('true') {|m| true}
+                match('false') {|m| false}
             end
 
         end
