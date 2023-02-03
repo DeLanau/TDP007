@@ -11,6 +11,21 @@ class Person
     @points = 0
   end
 
+#rules som kan utåkas eller ändras beroende på olika policy. 
+  def rules()
+
+    if @gender == "M" and @exp < 3 then
+      @points *= 0.9
+      puts 1 
+    end
+  
+    if @car == "Volvo" and @post.match(/^(58)/) then
+      @points *= 1.2
+      puts 2
+    end
+    
+  end 
+
   def evaluate_policy(filename)
 
     #läser in filen och kör den som ruby kod. 
