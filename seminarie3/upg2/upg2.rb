@@ -253,7 +253,7 @@ class Statement
             end
 
             rule :assign do
-                match('(','set', :var, :expr, ')') {|_, _, a, b, _| var{a => b} }
+                match('(','set', :var, :expr, ')') {|_, _, a, b, _| @var[a] = b}
             end
              #=begin
             rule :expr do
@@ -264,10 +264,15 @@ class Statement
             end
              #=end    
             rule :term do
-                match(:var) {|m| m.to_i} 
+                match(:var) 
                 match('true') {|m| true}
                 match('false') {|m| false}
-            end
+              end
+              
+              rule :var do
+                match(/\w+/) {|m| if @var.key?(m) == true then @var[m] else m end}
+                match(Integer)
+              end
 
         end
 
