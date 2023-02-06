@@ -241,8 +241,8 @@ class Statement
         @stateparser = Parser.new("state maker") do
             token(/\(/) {|m| m}
             token(/\)/) {|m| m}
-            token(/\d+/) { |m| m.to_i }
             token(/\w+/) {|m| m}
+            token(/\d+/) { |m| m.to_i }
             token(/\s/)
 
             @var = {}
@@ -264,15 +264,21 @@ class Statement
             end
              #=end    
             rule :term do
-                match(:var) 
-                match('true') {|m| true}
-                match('false') {|m| false}
-              end
+              match('true') {|m| true}
+              match('false') {|m| false}
+              match(:var) 
+            end
               
-              rule :var do
-                match(/\w+/) {|m| if @var.key?(m) == true then @var[m] else m end}
-                match(Integer)
-              end
+            rule :var do
+              match(Integer)
+              match(/\w+/) {|m| 
+                if @var.key?(m) then 
+                  @var[m] 
+                else 
+                  m 
+                end
+              }
+            end
 
         end
 
@@ -290,7 +296,11 @@ class Statement
               roll
             end
           end
-        
+          
+          def parse(str)
+            @stateparser.parse str
+          end
+
           def log(state = true)
             if state
               @stateparser.logger.level = Logger::DEBUG
@@ -314,4 +324,4 @@ end
 # [diceroller] (2+8*1d20)*3d6
 # => 306 
 
-Statement.new.roll 
+#Statement.new.roll 
