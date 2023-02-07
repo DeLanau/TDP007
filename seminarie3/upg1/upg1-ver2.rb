@@ -36,13 +36,12 @@ class Individual
                 calc_range(name, @exp, args)
             end
             
-            if name.to_s.split('_')[0] == @gender then
+            if name.to_s == @gender then
                 @points += args[0]
             end
 
             if name.to_s.split('_')[0] == "age" then
                 calc_range(name, @yo, args)
-            
             end
         end
     end
