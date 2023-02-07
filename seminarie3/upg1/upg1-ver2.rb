@@ -1,4 +1,4 @@
-class Person
+class Individual
 
     #car, postnummer, har haft körkort, kön, ålder
     def initialize(car = '', post = '', exp = '', gender = '', yo = '')
@@ -15,7 +15,7 @@ class Person
         #läser in filen och kör den som ruby kod. 
         self.instance_eval(File.read(filename))
         rules()
-        p @points
+        p @points.round(2)
     end   
 
     def method_missing(name, *args)
@@ -45,7 +45,7 @@ class Person
             
             end
         end
-
+    end
     def rules()
 
         if @gender == "M" and @exp < 3 then
@@ -64,9 +64,6 @@ class Person
             @points += args[0]
         end
     end
-
+    
     
 end
-
-per = Person.new("Volvo", "58435", 2, "M", 32)
-per.evaluate_policy("policy.rb")
