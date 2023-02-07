@@ -311,16 +311,4 @@ class Statement
 
 end
 
-# Examples of use
-
-# irb(main):1696:0> DiceRoller.new.roll
-# [diceroller] 1+3
-# => 4
-# [diceroller] 1+1d4
-# => 2
-# [diceroller] 1+1d4
-# => 3
-# [diceroller] (2+8*1d20)*3d6
-# => 306 
-
-Statement.new.roll 
+#Statement.new.roll 

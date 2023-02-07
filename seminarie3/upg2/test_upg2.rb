@@ -15,6 +15,10 @@ class MyTest < Test::Unit::TestCase
         assert(lang.parse("(set d 2)"))
         assert_equal("2", lang.parse("(or d 1)"))
         assert_equal("1", lang.parse("(and d 1)"))
+
+        assert_equal(false, lang.parse("(set a false)"))
+        assert_equal(true, lang.parse("(not a)"))
+
         
     end
 end
