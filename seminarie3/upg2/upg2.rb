@@ -296,7 +296,7 @@ class Statement
               roll
             end
           end
-          
+          #parse används för inmatning inom testning, strängen som parameter är den inmatning som skulle vara i terminalen
           def parse(str)
             @stateparser.parse str
           end
@@ -324,4 +324,4 @@ end
 # [diceroller] (2+8*1d20)*3d6
 # => 306 
 
-#Statement.new.roll 
+Statement.new.roll 
