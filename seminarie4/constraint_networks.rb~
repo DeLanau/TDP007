@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# coding: iso-8859-1
 
 # ----------------------------------------------------------------------------
 #  Unidirectional constraint network for logic gates
@@ -173,22 +172,6 @@ class ArithmeticConstraint
       logger.debug("#{self} : #{out} updated")
       out.assign(val, self)
     end
-
-    #TODO change start 
-      if out.has_value? then
-        if not a.has_value? then
-          
-          val = out.value.send(inverse_op, b.value)
-          a.assign(val, self)
-          logger.debug("#{self} : #{a} updated")
-        elsif not b.has_value?
-
-          val = out.value.send(inverse_op, a.value)
-          b.assign(val, self)
-          logger.debug("#{self} : #{b} updated")
-        end
-      end 
-    #TODO change end
     self
   end
   
@@ -318,8 +301,6 @@ def test_adder
   # a should now be 15
   puts "a = "+a.value.to_s
 end
-
-test_adder
 
 # ----------------------------------------------------------------------------
 #  Assignment
