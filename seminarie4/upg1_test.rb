@@ -43,5 +43,11 @@ class MyTest < Test::Unit::TestCase
     assert_equal(10, a.value)
     
   end 
+
+  def test_3 
+
+    
+
+  end 
   
 end
