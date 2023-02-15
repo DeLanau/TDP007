@@ -45,9 +45,15 @@ class MyTest < Test::Unit::TestCase
   end 
 
   def test_3 
-
-    
-
+    c, f = celsius2fahrenheit
+    c.user_assign(100)
+    assert_equal(212, f.value)
   end 
-  
+
+  def test_4
+    c, f = celsius2fahrenheit
+    f.user_assign(50)
+    assert_equal(10, c.value)
+  end
+
 end

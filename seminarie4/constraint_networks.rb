@@ -348,25 +348,16 @@ def celsius2fahrenheit
   # b2 = 32
   # c2 = a2 + b2 = F 
   
-  a = Connector.new("a")
-  b = ConstantConnector.new("b", 1.8)
-  c = Connector.new("c")
+  celsius = Connector.new("celsius")
+  multi = ConstantConnector.new("multi", 1.8)
+  factor = Connector.new("factor")
 
-  b2 = ConstantConnector.new("b2", 32)
-  c2 = Connector.new("c2")
+  add = ConstantConnector.new("add", 32)
+  fahr = Connector.new("fahr")
 
-  Multiplier.new(a, b, c)
-  
-  Adder.new(c, b2, c2)
-  a.user_assign(10)
-  puts c2.value
-
-  a.user_assign(100)
-  puts c2.value
-
-  a.forget_value "user"
-  c2.user_assign(100)
-  puts a.value
+  Multiplier.new(celsius, multi, factor)
+  Adder.new(factor, add, fahr)
+  return celsius, fahr
 end
 
 celsius2fahrenheit
