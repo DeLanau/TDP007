@@ -3,7 +3,7 @@
 require 'logger'
 
 # We will use the constraint networks we defined in the previous seminar.
-require 'constraint_networks'
+require './constraint_networks'
 
 # 1. Parsing a recursively defined language. The code below defines a
 # recursive-descent parser, which can parse a language and create a
