@@ -130,7 +130,7 @@ end
 # Fahrenheit, we need to propagate changes from either end to the
 # other.
 
-module PrettyPrint
+module Prettyprint
 
   # To make printouts of connector objects easier, we define the
   # inspect method so that it returns the value of to_s. This method
@@ -148,7 +148,7 @@ end
 
 class ArithmeticConstraint
 
-  include PrettyPrint
+  include Prettyprint
 
   attr_accessor :a,:b,:out
   attr_reader :logger,:op,:inverse_op
@@ -174,7 +174,6 @@ class ArithmeticConstraint
       out.assign(val, self)
     end
 
-    #TODO change start 
       if out.has_value? then
         if not a.has_value? then
           
@@ -188,7 +187,6 @@ class ArithmeticConstraint
           logger.debug("#{self} : #{b} updated")
         end
       end 
-    #TODO change end
     self
   end
   
@@ -224,7 +222,7 @@ end
 
 class Connector
     
-  include PrettyPrint
+  include Prettyprint
 
   attr_accessor :name,:value
 

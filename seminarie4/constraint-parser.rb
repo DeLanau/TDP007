@@ -343,9 +343,8 @@ class ConstraintParser < Parser
         @connectors[constant] ||= ConstantConnector.new(constant,constant.to_i) 
       end
       token(/./) { |m| m }
-      
-      start :statement do
 
+      start :statement do
         match(:expr, '=', :term) do |lh, _, rh| 
           replace_conn(lh, rh)
           # Return all variables in the equation apart from the ones
@@ -364,7 +363,6 @@ class ConstraintParser < Parser
       end
 
       rule :expr do
-
         match(:expr, '+', :term) do |a, _, b| 
           conn_a,conn_b,conn_c=get_connectors(a,'+',b)
           Adder.new(conn_a,conn_b,conn_c)
@@ -406,6 +404,19 @@ class ConstraintParser < Parser
 
   # Retrieve and generate connectors for the binary constraints 
   def get_connectors(conn_a,op,conn_b)
+
+    if conn_a.is_a? ArithmeticConstraint then
+      conn_a = conn.a.b
+    end
+
+    if conn_b.is_a? ArithmeticConstraint then
+      conn_b = conn_b.b
+    end
+
+    # conn_a = get_connector(conn_a)
+    # conn_b = get_connector(conn_b)
+    # p conn_a, conn_b
+
     name_c="#{conn_a.name}#{op}#{conn_b.name}"
     conn_c=Connector.new(name_c)
     @connectors[name_c]=conn_c
@@ -414,6 +425,7 @@ class ConstraintParser < Parser
 
   # Unify the connectors on the left and right hand side of an equality
   def replace_conn(lh,rh)
+    
     lh_conn,rh_conn=[get_connector(lh),get_connector(rh)]
     conn,exp=[nil,nil]
     if rh.is_a?(ArithmeticConstraint) then
@@ -428,6 +440,18 @@ class ConstraintParser < Parser
     conn.add_constraint(exp)
   end
   
+  def get_connector(expr)
+    if expr.is_a? Connector then
+      p "This is a connector #{expr}"
+      return expr
+    elsif expr.is_a? ArithmeticConstraint then
+      p "This is not #{expr}"
+      p "We return #{expr.out}"
+      return expr.out
+      #get_connector(expr.out)
+    end
+  end
+
   def parse(str)
     @connectors={}
     super(str)
