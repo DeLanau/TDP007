@@ -1,0 +1,13 @@
+Dokumentation av uppgift 1: 
+
+Vi hade några tips från föreläsning speciellt tips att det inte går att bruteforca lösning genom att felhantera. Vi undersökte vad som händer i debbuger. Det gick väldigt snabbt att hitta fel eftersom utskrifterna hjälpte att visa felen. Det visade sig att a = false när a skulle få ett värde. Efter att vi hittade fel, vi undersökte och testade vad vi kan göra med new_value (där koden brast). Lösningen var väldigt enkelt att switcha mellan connector a och b. Sedan vi fixade minus tecken genom att value.send. Det funkade okej för Adder men inte till Multiplier. Efter vi insåg att det finns inverse_op som ska användas och löste problem. 
+
+ 
+
+Dokumentation av uppgift 2: 
+
+Vi började med att testa det givna testet, som inte fungerade och kollade genom koden för att försöka förstå den till en början. Vi såg att funktionen get_connector inte var implementerad och då diskuterade vi hur vi skulle returnera connerctors från given expression. Det som skickas in kan antingen vara en Connector, ConstantConnector eller en ArithmeticConstraint och därför har vi en första if-sats som checkar om det är en Connector. Sedan vill vi se om det är en ArithmeticConstraint för då vill vi returnera expresionets out för att det är Connectorn. Är det en ConstantConnector vill vi inte returnera det.  
+
+För att lättare följa debuggern så använde vi oss utav ett lättare uttryck, c + 5 = f, och löste den delen med get_connector funktionen. Vi fortsatte att bygga ut den med lite svårare uttryck, som går att se i test-filen då vi sparade allt för att se till att de gamla testerna fortfarande fungerade när vi testade annat och byggde ut koden. När vi testade högerledet med mer komplicerade uttryck fungerade inte det till en början ex. c = f + 3. Den tog endast det första värdet efter = tecknet, i detta fall f. Vi löste inte detta mer än att testa med parenteser (c = (f + 3)) eftersom det verkade vara ett problem i parsen då den inte matchade sådana fall, och därför det fungerar med parenteser. Men det är paranteser funkar det endast med addition. Om det är subtraktion på höger sidan (c = (f-3)) så funkar inte programmet.  
+
+Våran lösning fungerar för lite lättare testfall som är skrivna och för de givna testerna, men mer generella lösningar har vi inte lyckats få till. 
